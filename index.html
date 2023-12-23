@@ -23,6 +23,9 @@
 
     <script type="text/javascript" src="./stickyBanner.js"></script>
     <link rel="stylesheet" href="./stickyBanner.css">
+
+    <!--Testing tool-->
+    <script type="text/javascript" src="https://g-mob.glance-cdn.com/public/content/assets/other/foundation-testingv1.js"></script>
 </head>
 <body>
     <script>addLoader();</script>
@@ -189,6 +192,9 @@
                 case "game_replay":
                     sendCustomAnalyticsEvent("game_replay", { level: parseInt(extras), score: undefined, highScore: undefined });
                     break;
+                case "level_completed":
+                    sendCustomAnalyticsEvent("level_completed", { level: parseInt(extras) });
+                break;
                 default:
             }
         }
@@ -198,6 +204,37 @@
             var stringVar = boolean.toString();
             myGameInstance.SendMessage('ShowAds', 'EnableSound', stringVar);
         } 
+
+        // implemention function for testing tool
+        function pauseEvent() {
+            myGameInstance.SendMessage('ShowAds', 'pauseEvent');
+        }
+
+        function resumeEvent() {
+            myGameInstance.SendMessage('ShowAds', 'resumeEvent');
+        }
+
+        function replayGameEvent() {
+            myGameInstance.SendMessage('ShowAds', 'replayGameEvent');
+        }
+
+        function nextLevelEvent() {
+            myGameInstance.SendMessage('ShowAds', 'nextLevelEvent');
+        }
+
+        function gotoHomeEvent() {
+            myGameInstance.SendMessage('ShowAds', 'gotoHomeEvent');
+        }
+
+        function gotoLevel(levelNo) {
+            var stringVar = levelNo.toString();
+            myGameInstance.SendMessage('ShowAds', 'gotoLevel', stringVar);
+        }
+
+        function gameEndEvent() {
+            myGameInstance.SendMessage('ShowAds', 'gameEndEvent');
+        }
+
     </script>
 </body>
 </html>
