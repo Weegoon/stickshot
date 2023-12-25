@@ -175,7 +175,7 @@ function rewardedCallbacks(obj) {
     obj.adInstance?.registerCallback('onAdDisplayed', (data) => {
         console.log('onAdDisplayed Rewarded CALLBACK', data);
 
-
+        //myGameInstance.SendMessage('ShowAds', 'MuteSoundAdsOpen');
     });
 
 
