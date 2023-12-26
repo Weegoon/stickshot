@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="./stickyBanner.css">
 
     <!--Testing tool-->
-    <script type="text/javascript" src="https://g-mob.glance-cdn.com/public/content/assets/other/foundation-testingv1.js"></script>
+    <!--<script type="text/javascript" src="https://g-mob.glance-cdn.com/public/content/assets/other/foundation-testingv1.js"></script>-->
 </head>
 <body>
     <script>addLoader();</script>
@@ -137,8 +137,8 @@
                     refreshStickyBannerAd();
                     StickyBannerInstance = window?.GlanceGamingAdInterface?.showStickyBannerAd(StickyObj, bannerCallbacks);
                     
+                    replayInstance = window.GlanceGamingAdInterface.loadRewardedAd(replayObj, rewardedCallbacks);
                     rewardInstance = window.GlanceGamingAdInterface.loadRewardedAd(rewardObj, rewardedCallbacks);
-                    replayInstance = window.GlanceGamingAdInterface.loadRewardedAd(replayObj, replayCallbacks);
                 }, 1000)
 
             }
@@ -206,34 +206,34 @@
         } 
 
         // implemention function for testing tool
-        function pauseEvent() {
-            myGameInstance.SendMessage('ShowAds', 'pauseEvent');
-        }
+        //function pauseEvent() {
+        //    myGameInstance.SendMessage('ShowAds', 'pauseEvent');
+        //}
 
-        function resumeEvent() {
-            myGameInstance.SendMessage('ShowAds', 'resumeEvent');
-        }
+        //function resumeEvent() {
+        //    myGameInstance.SendMessage('ShowAds', 'resumeEvent');
+        //}
 
-        function replayGameEvent() {
-            myGameInstance.SendMessage('ShowAds', 'replayGameEvent');
-        }
+        //function replayGameEvent() {
+        //    myGameInstance.SendMessage('ShowAds', 'replayGameEvent');
+        //}
 
-        function nextLevelEvent() {
-            myGameInstance.SendMessage('ShowAds', 'nextLevelEvent');
-        }
+        //function nextLevelEvent() {
+        //    myGameInstance.SendMessage('ShowAds', 'nextLevelEvent');
+        //}
 
-        function gotoHomeEvent() {
-            myGameInstance.SendMessage('ShowAds', 'gotoHomeEvent');
-        }
+        //function gotoHomeEvent() {
+        //    myGameInstance.SendMessage('ShowAds', 'gotoHomeEvent');
+        //}
 
-        function gotoLevel(levelNo) {
-            var stringVar = levelNo.toString();
-            myGameInstance.SendMessage('ShowAds', 'gotoLevel', stringVar);
-        }
+        //function gotoLevel(levelNo) {
+        //    var stringVar = levelNo.toString();
+        //    myGameInstance.SendMessage('ShowAds', 'gotoLevel', stringVar);
+        //}
 
-        function gameEndEvent() {
-            myGameInstance.SendMessage('ShowAds', 'gameEndEvent');
-        }
+        //function gameEndEvent() {
+        //    myGameInstance.SendMessage('ShowAds', 'gameEndEvent');
+        //}
 
     </script>
 </body>

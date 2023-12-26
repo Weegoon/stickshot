@@ -175,7 +175,7 @@ function rewardedCallbacks(obj) {
     obj.adInstance?.registerCallback('onAdDisplayed', (data) => {
         console.log('onAdDisplayed Rewarded CALLBACK', data);
 
-        //myGameInstance.SendMessage('ShowAds', 'MuteSoundAdsOpen');
+
     });
 
 
@@ -210,13 +210,14 @@ function rewardedCallbacks(obj) {
 }
 // function to be called after ad closes
 function runOnAdClosed() {
+    window.focus();
+
     if (_triggerReason === 'replay') {
 
         // call game function for replay
+        myGameInstance.SendMessage('ShowAds', 'OnInterstitialAdsClose');
         _triggerReason = ''
         showGame();
-
-        myGameInstance.SendMessage('ShowAds', 'OnInterstitialAdsClose');
 
         replayInstance = window.GlanceGamingAdInterface.loadRewardedAd(replayObj, rewardedCallbacks);
 
