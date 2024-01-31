@@ -257,6 +257,11 @@ function rewardEvent() {
     if (!is_rewarded_noFill) {
         window.GlanceGamingAdInterface.showRewarededAd(rewardInstance);
         myGameInstance.SendMessage('ShowAds', 'MuteSoundAdsOpen');
+
+        sendCustomAnalyticsEvent( 'rewarded_ad', {
+            successCB: undefined,
+            failureCB: undefined
+          } )
     } else {
         runOnAdClosed();
     }

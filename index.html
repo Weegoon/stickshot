@@ -10,16 +10,7 @@
 
     <!--Base Properties-->
     <script type="text/javascript" src="./jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fingerprintjs2/2.1.0/fingerprint2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js"></script>
-
-    <script type="text/javascript" src="./gpid.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
     <script type="text/javascript" src="./ads.js"></script>
-
-    <script type="text/javascript" src="./loadingPage.js"></script>
-    <link rel="stylesheet" href="./loadingPage.css">
 
     <script type="text/javascript" src="./stickyBanner.js"></script>
     <link rel="stylesheet" href="./stickyBanner.css">
@@ -28,7 +19,6 @@
     <!--<script type="text/javascript" src="https://g-mob.glance-cdn.com/public/content/assets/other/foundation-testingv1.js"></script>-->
 </head>
 <body>
-    <script>addLoader();</script>
     <div id="unity-container" class="unity-desktop">
         <canvas id="unity-canvas" width=600 height=960></canvas>
         <!--<div id="unity-loading-bar">
@@ -39,8 +29,8 @@
         </div>-->
         <div id="unity-warning"> </div>
         <div id="unity-footer">
-            <div id="unity-webgl-logo"></div>
-            <div id="unity-fullscreen-button"></div>
+            <!--<div id="unity-webgl-logo"></div>
+            <div id="unity-fullscreen-button"></div>-->
             <div id="unity-build-title">stickshot</div>
         </div>
     </div>
@@ -112,7 +102,7 @@
         canvas.style.width = window.innerWidth + 'px';
         canvas.style.height = window.innerHeight + 'px';
 
-        unityShowBanner('WebGL builds are not supported on mobile devices.');
+        //unityShowBanner('WebGL builds are not supported on mobile devices.');
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
@@ -122,13 +112,13 @@
 
       //loadingBar.style.display = "block";
       var myGameInstance = null;
+      var loadingPerc;
       var script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
-            //progressBarFull.style.width = 100 * progress + "%";
-            /*progressBar(100 * progress);*/
             progressBar(100 * progress);
+            loadingPerc = 100 * progress;
 
             if (progress == 1) {
                 sendCustomAnalyticsEvent("game_load", {});
@@ -147,13 +137,10 @@
           //loadingBar.style.display = "none";
 
             myGameInstance = unityInstance;
-            //refreshStickyBannerAd();
-            //showBumperAd();
-            //rewardInstance = window.GlanceGamingAdInterface.loadRewardedAd(rewardObj, rewardedCallbacks);
 
-          fullscreenButton.onclick = () => {
-            unityInstance.SetFullscreen(1);
-          };
+          //fullscreenButton.onclick = () => {
+          //  unityInstance.SetFullscreen(1);
+          //};
         }).catch((message) => {
           alert(message);
         });
@@ -206,34 +193,55 @@
         } 
 
         // implemention function for testing tool
-        //function pauseEvent() {
-        //    myGameInstance.SendMessage('ShowAds', 'pauseEvent');
-        //}
+        function pauseEvent() {
+            myGameInstance.SendMessage('ShowAds', 'pauseEvent');
+        }
 
-        //function resumeEvent() {
-        //    myGameInstance.SendMessage('ShowAds', 'resumeEvent');
-        //}
+        function resumeEvent() {
+            myGameInstance.SendMessage('ShowAds', 'resumeEvent');
+        }
 
-        //function replayGameEvent() {
-        //    myGameInstance.SendMessage('ShowAds', 'replayGameEvent');
-        //}
+        function replayGameEvent() {
+            myGameInstance.SendMessage('ShowAds', 'replayGameEvent');
+        }
 
-        //function nextLevelEvent() {
-        //    myGameInstance.SendMessage('ShowAds', 'nextLevelEvent');
-        //}
+        function nextLevelEvent() {
+            myGameInstance.SendMessage('ShowAds', 'nextLevelEvent');
+        }
 
-        //function gotoHomeEvent() {
-        //    myGameInstance.SendMessage('ShowAds', 'gotoHomeEvent');
-        //}
+        function gotoHomeEvent() {
+            myGameInstance.SendMessage('ShowAds', 'gotoHomeEvent');
+        }
 
-        //function gotoLevel(levelNo) {
-        //    var stringVar = levelNo.toString();
-        //    myGameInstance.SendMessage('ShowAds', 'gotoLevel', stringVar);
-        //}
+        function gotoLevel(levelNo) {
+            var stringVar = levelNo.toString();
+            myGameInstance.SendMessage('ShowAds', 'gotoLevel', stringVar);
+        }
 
-        //function gameEndEvent() {
-        //    myGameInstance.SendMessage('ShowAds', 'gameEndEvent');
-        //}
+        function gameEndEvent() {
+            myGameInstance.SendMessage('ShowAds', 'gameEndEvent');
+        }
+
+        function getLoadingPerc() {
+            if (loadingPerc >= 100) {
+                loadingPerc = 100;
+            }
+            return Math.ceil(loadingPerc);
+        }
+
+        function setWindowMargin(margin) {
+            // Get game canvas element. Canvas ID may vary.
+            const canvas = document.getElementById("unity-container");
+            const height = window.innerHeight;
+            const width = window.innerWidth;
+            const isLandscape = width > height;
+            if (isLandscape) {
+                canvas.style.marginLeft = `${margin}px`;
+            }
+            else {
+                canvas.style.marginTop = `${margin}px`;
+            }
+        }
 
     </script>
 </body>
